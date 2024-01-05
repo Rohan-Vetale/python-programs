@@ -56,22 +56,31 @@ def part_or_full():
     """
     return random.randint(1,2)   
 
+#initializing monthly wage
+monthly_wage = 0
+working_days = 20
+emp_present = 0
+
 try:
-    if is_present() :
-        print("Employee is present today")
-        match part_or_full():
-            case 1:
-                #When employee is part time
-                daily_wage = calc_daily_wage(wg_per_hr=20, hr_per_day=4)
-                wage_type = "Part time"
-            case 2:
-                #When employee is full time
-                daily_wage = calc_daily_wage(wg_per_hr=20, hr_per_day=8)
-                wage_type = "Full time"
-        print(f"Employee's daily wage is {daily_wage} as employee is {wage_type}")
-    else:
-        print("Employee is absent today")
-        
+    for day in range(working_days):
+        if is_present() :
+            #employee is present
+            emp_present += 1
+            match part_or_full():
+                case 1:
+                    #When employee is part time
+                    daily_wage = calc_daily_wage(wg_per_hr=20, hr_per_day=4)
+                case 2:
+                    #When employee is full time
+                    daily_wage = calc_daily_wage(wg_per_hr=20, hr_per_day=8)
+            monthly_wage += daily_wage
+        else:
+            #employee is absent
+            monthly_wage += 0
+            
+            
 except Exception as e:
     print(f"Exception occured {e} please try again")
+
+print(f"Employee's monthly wage is {monthly_wage} $ for a month of {working_days} days, employee was present for {emp_present} days")
     
