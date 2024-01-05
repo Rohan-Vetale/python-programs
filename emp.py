@@ -60,27 +60,38 @@ def part_or_full():
 monthly_wage = 0
 working_days = 20
 emp_present = 0
-
+total_hrs = 0
 try:
-    for day in range(working_days):
-        if is_present() :
-            #employee is present
-            emp_present += 1
-            match part_or_full():
-                case 1:
-                    #When employee is part time
-                    daily_wage = calc_daily_wage(wg_per_hr=20, hr_per_day=4)
-                case 2:
-                    #When employee is full time
-                    daily_wage = calc_daily_wage(wg_per_hr=20, hr_per_day=8)
-            monthly_wage += daily_wage
+    while True:
+        #loop till this condition is not met
+        if total_hrs < 100 and emp_present < 20:
+            if is_present() :
+                #employee is present
+                emp_present += 1
+                match part_or_full():
+                    case 1:
+                        #When employee is part time
+                        wg_per_hr = 20
+                        hr_per_day = 4
+                        
+                    case 2:
+                        #When employee is full time
+                        wg_per_hr = 20
+                        hr_per_day = 8
+                        
+                daily_wage = calc_daily_wage(wg_per_hr=wg_per_hr, hr_per_day=hr_per_day)
+                total_hrs += hr_per_day
+                monthly_wage += daily_wage
+            else:
+                #employee is absent
+                total_hrs += 0
+                monthly_wage += 0
         else:
-            #employee is absent
-            monthly_wage += 0
             
+            break
             
 except Exception as e:
     print(f"Exception occured {e} please try again")
 
-print(f"Employee's monthly wage is {monthly_wage} $ for a month of {working_days} days, employee was present for {emp_present} days")
+print(f"Employee's monthly wage is {monthly_wage} $ for a month of {working_days} working days, employee was present for {emp_present} days with total working hours of {total_hrs} hrs")
     
