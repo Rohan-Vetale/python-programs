@@ -42,13 +42,30 @@ def calc_daily_wage(wg_per_hr, hr_per_day):
     """   
     daily_wage = hr_per_day * wg_per_hr
     return daily_wage
-     
+
+def part_or_full():
+    """
+        Description:
+        This function is know whether the employee is part time or full time
+
+        Parameter:
+        None
+
+        Return:
+        It returns an Integer value 1 or 2, for part time or full time
+    """
+    return random.randint(1,2)   
 
 try:
     if is_present() :
         print("Employee is present today")
-        daily_wage = calc_daily_wage(wg_per_hr=20, hr_per_day=8)
-        print(f"Employee's daily wage is {daily_wage}")
+        if part_or_full() == 1:
+            daily_wage = calc_daily_wage(wg_per_hr=20, hr_per_day=4)
+            wage_type = "Part time"
+        else:
+            daily_wage = calc_daily_wage(wg_per_hr=20, hr_per_day=8)
+            wage_type = "Full time"
+        print(f"Employee's daily wage is {daily_wage} as employee is {wage_type}")
     else:
         print("Employee is absent today")
         
