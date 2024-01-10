@@ -6,92 +6,61 @@
 
 @Last Modified by: Rohan Vetale
 
-@Last Modified time: 2023-01-05 16:00:30
+@Last Modified time: 2023-01-10 16:00:30
 
 @Title : Employee wage with Use Cases
 
 
 '''
+
 import random
 
-def is_present():
-    """
-        Description:
-        This function is used to tell whether the employee is present or not
 
-        Parameter:
-        None
+class Worker:
+    def __init__(self, name, hourly_wage, max_work_days, max_work_hours):
+        self.hourly_wage = hourly_wage
+        self.max_work_days = max_work_days
+        self.max_work_hours = max_work_hours
+        self.worker_name = name
+        self.total_earnings = 0
 
-        Return:
-        It returns a boolean value True or False based on random.choice()
-    """
-    
-    return random.choice([True, False])
+    def calculate_wage(self):
+        """
+        Description: Implementation of Staff Wage Computation.
 
-def calc_daily_wage(wg_per_hr, hr_per_day):
-    """
-        Description:
-        This function is used to calculate daily wage of an employee
+        Parameter: None
 
-        Parameter:
-        wg_per_hr : It is employee's per hour wage
-        hr_per_day : It is employee's per day working hours        
+        Return: None
+        """
+        print("Welcome to Staff Wage Computation Program on Main Branch")
+        work_hours = 0
+        work_days = 0
+        while work_hours < self.max_work_hours and work_days < self.max_work_days:
+            work_type = random.randint(0, 2)
+            hours_worked = 0
+            match work_type:
+                case 0:
+                    hours_worked = 0
+                    # print("Employee is not present")
+                case 1:
+                    # print("Employee is present and working Part time")
+                    hours_worked = 4
+                case 2:
+                    # print("Employee is present and working Full time")
+                    hours_worked = 8
+            work_hours += hours_worked
+            self.total_earnings += hours_worked * self.hourly_wage
+            work_days += 1
+        # print(f"Max working Days: {work_days}")
+        # print(f"Total working hours of an employee is: {work_hours}")
+        # print(f"Total working days of an employee is: {self.total_earnings}")
 
-        Return:
-        It returns daily wage of employee as integer value
-    """   
-    daily_wage = hr_per_day * wg_per_hr
-    return daily_wage
 
-def part_or_full():
-    """
-        Description:
-        This function is know whether the employee is part time or full time
-
-        Parameter:
-        None
-
-        Return:
-        It returns an Integer value 1 or 2, for part time or full time
-    """
-    return random.randint(1,2)   
-
-#initializing monthly wage
-monthly_wage = 0
-working_days = 20
-emp_present = 0
-total_hrs = 0
-try:
-    while True:
-        #loop till this condition is not met
-        if total_hrs < 100 and emp_present < 20:
-            if is_present() :
-                #employee is present
-                emp_present += 1
-                match part_or_full():
-                    case 1:
-                        #When employee is part time
-                        wg_per_hr = 20
-                        hr_per_day = 4
-                        
-                    case 2:
-                        #When employee is full time
-                        wg_per_hr = 20
-                        hr_per_day = 8
-                        
-                daily_wage = calc_daily_wage(wg_per_hr=wg_per_hr, hr_per_day=hr_per_day)
-                total_hrs += hr_per_day
-                monthly_wage += daily_wage
-            else:
-                #employee is absent
-                total_hrs += 0
-                monthly_wage += 0
-        else:
-            
-            break
-            
-except Exception as e:
-    print(f"Exception occured {e} please try again")
-
-print(f"Employee's monthly wage is {monthly_wage} $ for a month of {working_days} working days, employee was present for {emp_present} days with total working hours of {total_hrs} hrs")
-    
+if __name__ == '__main__':
+    worker_name = input("Enter the worker name: ")
+    hourly_wage = int(input("Enter hourly wage: "))
+    max_work_days = int(input("Enter Max working Days: "))
+    max_work_hours = int(input("Enter Max working Hours: "))
+    worker_obj = Worker(worker_name, hourly_wage, max_work_days, max_work_hours)
+    worker_obj.calculate_wage()
+    print(f"{worker_obj.total_earnings}")
