@@ -113,12 +113,11 @@ def main():
                     if company_obj is not None:
                         for employee_name, employee_obj in company_obj.employee_dict.items():
                             logger.info(f"Employee Name: {employee_name} Employee Data: {employee_obj.total_wage}")
-                    else:
-                        print("This company name is not in our records")
                 case 10:
                     break
     except Exception as e:
         logger.exception
+
 
 
 if __name__ == '__main__':
