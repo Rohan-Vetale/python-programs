@@ -1,27 +1,11 @@
-'''
-
-@Author: Rohan Vetale
-
-@Date: 2023-01-05 16:00:30
-
-@Last Modified by: Rohan Vetale
-
-@Last Modified time: 2023-01-10 16:00:30
-
-@Title : Employee wage with Use Cases
-
-
-'''
-
 import random
 
-
-class Worker:
+class Employee:
     def __init__(self, name, hourly_wage, max_work_days, max_work_hours):
         self.hourly_wage = hourly_wage
         self.max_work_days = max_work_days
         self.max_work_hours = max_work_hours
-        self.worker_name = name
+        self.employee_name = name
         self.total_earnings = 0
 
     def calculate_wage(self):
@@ -55,12 +39,11 @@ class Worker:
         # print(f"Total working hours of an employee is: {work_hours}")
         # print(f"Total working days of an employee is: {self.total_earnings}")
 
-
 if __name__ == '__main__':
-    worker_name = input("Enter the worker name: ")
+    employee_name = input("Enter the employee name: ")
     hourly_wage = int(input("Enter hourly wage: "))
     max_work_days = int(input("Enter Max working Days: "))
     max_work_hours = int(input("Enter Max working Hours: "))
-    worker_obj = Worker(worker_name, hourly_wage, max_work_days, max_work_hours)
-    worker_obj.calculate_wage()
-    print(f"{worker_obj.total_earnings}")
+    employee_obj = Employee(employee_name, hourly_wage, max_work_days, max_work_hours)
+    employee_obj.calculate_wage()
+    print(f"{employee_obj.total_earnings}")
