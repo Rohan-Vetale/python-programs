@@ -120,6 +120,57 @@ class MultipleCompany:
     def __init__(self):
         self.company_dict = {}
 
+    def add_company(self, company_obj):
+        """
+        Description: This function add company to company dictionary
+        Parameter: company object
+        Return:None
+        """
+        self.company_dict.update({company_obj.comp_name: company_obj})
+        logger.info(f"{company_obj.comp_name} is Added!!")
+
+    def all_comp_details(self):
+        """
+        Description: This function display all company from company dictionary
+        Parameter: company object
+        Return:None
+        """
+        for key, comp_data in self.company_dict.items():
+            logger.info(f"Company Name: {key} Company Data: {comp_data.employee_dict}")
+
+    def get_company(self, comp_name):
+        """
+        Description: This function for getting data of a company.
+        Parameter: String
+        Return: company name
+        """
+        return self.company_dict.get(comp_name)
+
+    def remove_company(self, comp_name):
+        """
+        Description: This function delete the company from the company dictionary.
+        Parameter: String
+        Return:None
+        """
+        if comp_name in self.company_dict:
+            self.company_dict.pop(comp_name)
+            logger.info(f"{comp_name} is deleted.")
+        else:
+            logger.info("Company not Found")
+
+    def get_company_with_all_employee(self, comp_name):
+        """
+        Description: This function gives all employee of a company from the company dictionary.
+        Parameter: String
+        Return:None
+        """
+        company_obj: Company = self.company_dict.get(comp_name)
+        if company_obj:
+            logger.info(f"{company_obj.comp_name} and total employee in company {len(company_obj.employee_dict)}")
+            company_obj.employee_details()
+        else:
+            logger.info("company is not present!!")
+
 
 def main():
     multi_company_obj = MultipleCompany()
